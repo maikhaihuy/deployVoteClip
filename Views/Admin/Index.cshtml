@@ -1,0 +1,75 @@
+﻿@model List<VoteClip.Models.Round>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--  page-wrapper -->
+<div id="page-wrapper">
+
+    <div class="row">
+        <!--  page header -->
+        <div class="col-lg-12">
+            <h1 class="page-header">Cuộc thi abc</h1>
+        </div>
+        <!-- end  page header -->
+    </div>
+    <!-- table for round -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    ABC
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên vòng thi</th>
+                                    <th>Mô tả</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Công cụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int index = 0;
+                                    foreach (VoteClip.Models.Round round in Model)
+                                    {
+                                        string classTr = "odd gradeC";
+                                        if (index % 2 == 0)
+                                        {
+                                            classTr = "odd gradeX";
+                                        }
+                                        <tr class="@classTr">
+                                            <td>@index</td>
+                                            <td>@round.nameRound</td>
+                                            <td>@round.ruleRound</td>
+                                            <td>@round.startDate</td>
+                                            <td class="center">@round.endDate</td>
+                                            <td class="center">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/Admin/ListVideos?idRound=@round.idRound">Danh sách video</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/Admin/EditRound?idRound=@round.idRound">Sửa</a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--End Advanced Tables -->
+        </div>
+    </div>
+</div>
+<!-- end page-wrapper -->

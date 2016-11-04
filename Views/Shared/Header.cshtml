@@ -1,0 +1,40 @@
+﻿@using VoteClip.Models
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <span class="symbol"><img src="~/assets/images/logo.png" width="100%" alt="" /></span><span class="title">KHOA LUẬT - ĐẠI HỌC TÔN ĐỨC THẮNG</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul class="nav">
+        <li><a href="/home/index">Trang chủ</a></li>
+        <li>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Vòng<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                @{
+                    List<Round> list = RoundService.GetAllRound();
+                    foreach (var round in list)
+                    {
+                        <li>
+                            <a href="/Detail/Round?idRound=@round.idRound">@round.nameRound</a>
+                        </li>
+                    }
+                }
+            </ul>
+            <!-- second-level-items -->
+        </li>
+        <li><a href="/about/rule">Thể lệ</a></li>
+    </ul>
+</nav>

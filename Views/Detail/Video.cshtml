@@ -1,0 +1,36 @@
+﻿@using VoteClip.Models
+@model Video
+@{
+    ViewBag.Title = "Video";
+    Round round = RoundService.GetRoundById((int)Model.idRound);
+    string urlEmbedded = "https://www.youtube.com/embed/" + Model.urlVideo.Split('=')[1];
+}
+
+<div id="main">
+    <div class="inner">
+        <h2>
+            <a href="/Detail/Round?idRound=@round.idRound">@round.nameRound</a> / <a href="">@Model.titleVideo</a>
+        </h2>
+        <h1>@Model.titleVideo</h1>
+        <!-- 16:9 aspect ratio -->
+        <div class="videoWrapper">
+            <iframe width="100%" class="embed-responsive-item" src="@urlEmbedded" allowfullscreen></iframe>
+        </div>
+        <div class="row">
+            <section width="80%">
+                <pre>
+                <code>
+- Họ tên: @Model.authorVideo
+- Mã số sinh viên: @Model.codeAuthor
+- Tên bài dự thi: @Model.titleVideo
+- Mô tả bài thi: @Model.describeVideo
+                </code>
+            </pre>
+            </section>
+            <div style="float:right; margin-top:1em">
+                <h3>@VotingVideoService.GetListUserVote(Model.idVideo).Count() lượt vote</h3>
+                <a href="#" class="button special small">Vote</a>
+            </div>
+        </div>
+</div>
+</div>
