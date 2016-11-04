@@ -29,9 +29,28 @@
             </pre>
             </section>
             <div style="float:right; margin-top:1em">
-                <h3>@VotingVideoService.GetListUserVote(Model.idVideo).Count() lượt vote</h3>
                 @*<button id="btnVote" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#voteModal">Vote</button>*@
-                <button type="button" class="btn btn-info btn-lg" id="btnAgree">Open Modal</button>
+                @{ if (Model.authorVideo.Contains("vs."))
+                    {
+                        int indexCode = Model.codeAuthor.IndexOf(" vs. ");
+                        string codeAuthor1 = Model.codeAuthor.Substring(0, indexCode);
+                        string codeAuthor2 = Model.codeAuthor.Substring(indexCode + 5, Model.codeAuthor.Length - indexCode - 5);
+                        indexCode = Model.authorVideo.IndexOf(" vs. ");
+                        string nameAuthor1 = Model.authorVideo.Substring(0, indexCode);
+                        string nameAuthor2 = Model.authorVideo.Substring(indexCode + 5, Model.authorVideo.Length - indexCode - 5);
+
+                        <h3>@codeAuthor1 - @nameAuthor1: @VotingVideoService.GetListUserVote(Model.idVideo).Count() lượt</h3>
+                        <h3>@codeAuthor2 - @nameAuthor2: @VotingVideoService.GetListUserVote(Model.idVideo).Count() lượt</h3>
+                        <button type="button" class="btn btn-info btn-lg" id="btnAgree">Vote @codeAuthor1</button>
+                        <button type="button" class="btn btn-info btn-lg" id="btnAgree">Vote @codeAuthor2</button>
+                    }
+                    else
+                    {
+
+                        <h3>@VotingVideoService.GetListUserVote(Model.idVideo).Count() lượt vote</h3>
+                        <button type="button" class="btn btn-info btn-lg" id="btnAgree">Vote @Model.codeAuthor</button>
+                    }
+                }
             </div>
         </div>
         
