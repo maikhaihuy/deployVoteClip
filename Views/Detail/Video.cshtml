@@ -31,7 +31,7 @@
             <div style="float:right; margin-top:1em">
                 <h3>@VotingVideoService.GetListUserVote(Model.idVideo).Count() lượt vote</h3>
                 @*<button id="btnVote" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#voteModal">Vote</button>*@
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#voteModal">Open Modal</button>
+                <button type="button" class="btn btn-info btn-lg" id="btnAgree">Open Modal</button>
             </div>
         </div>
         
@@ -39,7 +39,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div id="voteModal" class="modal fade" role="dialog">
+@*<div id="voteModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content" style="margin: 1em">
@@ -52,8 +52,23 @@
                 <p class="text-danger">Bạn chỉ được bình chọn một lần duy nhất.</p>
             </div>
             <div class="modal-footer" style="align-content: center;">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnAgree" class="btn btn-ok" data-dismiss="modal">Bình chọn</button>
             </div>
         </div>
     </div>
-</div>
+</div>*@
+<script>
+    $(document)
+        .ready(function(data) {
+            $('#btnAgree').click(function () {
+                bootbox.confirm("Bạn chắc chắn muốn bình chọn cho video này? \n Bạn chỉ được bình chọn một lần duy nhất.", function (result) {
+                    if(result == "true" || result == true) {
+                        FB.getLoginStatus(function (response) {
+                            statusChangeCallback(response);
+                        });
+                    }
+                });
+            });
+        });
+    
+</script>

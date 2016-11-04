@@ -30,6 +30,11 @@
             // The person is logged into Facebook, but not your app.
             document.getElementById('status').innerHTML = 'Please log ' +
                 'into this app.';
+            FB.login(function (response) {
+                // Handle the response object, like in statusChangeCallback() in our demo
+                // code.
+                console.log('aaa ' + response);
+            });
         } else {
             // The person is not logged into Facebook, so we're not sure if
             // they are logged into this app or not.
@@ -46,19 +51,7 @@
             statusChangeCallback(response);
         });
     }
-    var checkVoted = function (idVideo) {
-        FB.getLoginStatus(function (response) {
-            if (response.status === 'connected') {
-                // Logged into your app and Facebook.
-                // Check voted?
-                $("#btnVote").html("abc");
-                console.log(response);
-            } else {
-                $("#btnVote").html("123");
-                console.log(response);
-            }
-        });
-    }
+
     window.fbAsyncInit = function () {
         FB.init({
             appId: '934322736701847',
@@ -83,8 +76,6 @@
         FB.getLoginStatus(function (response) {
             statusChangeCallback(response);
         });
-
-        FB.Event("xfbml.render", checkVoted);
     };
 
 
@@ -108,7 +99,9 @@
     }
 </script>
     <script src="~/assets/js/jquery.min.js"></script>
-    <div id="fb-root"></div>
+<div id="fb-root"></div>
+    @*<div id="status">
+</div>*@
 @*    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>*@
     <div id="wrapper">
@@ -121,6 +114,7 @@
 
     <script src="~/assets/js/bootstrap-managemodal.js"></script>
     <script src="~/assets/js/modal.js"></script>
+    <script src="~/assets/js/bootbox.js"></script>
     <script src="~/assets/js/skel.min.js"></script>
     <script src="~/assets/js/util.js"></script>
     <!--[if lte IE 8]><script src="~/assets/js/ie/respond.min.js"></script><![endif]-->
