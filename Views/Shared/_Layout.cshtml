@@ -73,9 +73,9 @@
         //
         // These three cases are handled in the callback function.
 
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
-        });
+        //FB.getLoginStatus(function (response) {
+        //    statusChangeCallback(response);
+        //});
     };
 
 
@@ -104,6 +104,8 @@
 </div>*@
 @*    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>*@
+    <div id="status">
+    </div>
     <div id="wrapper">
         @Html.Partial("Header")
 
